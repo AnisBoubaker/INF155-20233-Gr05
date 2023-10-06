@@ -43,12 +43,13 @@ int main(void) {
         moyenne = moyenne + notes[i];
     }
     moyenne = moyenne / nb_notes;
-
     printf("La moyenne de la classe: %.2lf\n", moyenne);
 
 
+    //Compléter le code pour compter le nombre de notes supérieures à 60
+    // et afficher ce nom
+    // Le nombre de notes > 60 est: 4
 
-    printf("La 2e case de mon tableau contient: %lf\n", notes[1]);
 
     return EXIT_SUCCESS;
 }
