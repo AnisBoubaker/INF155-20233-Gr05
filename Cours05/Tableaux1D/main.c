@@ -50,6 +50,16 @@ int main(void) {
     // et afficher ce nom
     // Le nombre de notes > 60 est: 4
 
+    int nb_reussites = 0;
+    for(int i=0; i<nb_notes; i++)
+    {
+        if(notes[i] >= 60)
+        {
+            nb_reussites ++;
+        }
+    }
+    printf("Le nombre d'etudiants ayant reussi: %i\n", nb_reussites);
+
 
     return EXIT_SUCCESS;
 }
