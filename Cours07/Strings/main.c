@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #define TAILLE_MAX 100
 
@@ -28,21 +29,68 @@ int main() {
 //    salutations[13] = '\0';
 //    printf("%s", salutations);
 
-    int taille =0;
-    while(salutation3[taille]!='\0')
-    {
-        taille++;
-    }
-
+//Détermine la taille de salutations 3
+//    int taille =0;
+//    while(salutation3[taille]!='\0')
+//    {
+//        taille++;
+//    }
+    int taille = strlen(salutation3);
     printf("La taille de la chaine salutations3: %i\n", taille);
 
     //salutation = salutation3;
-    for(int i=0; i < taille+1 ; i++)
+//    for(int i=0; i < taille+1 ; i++)
+//    {
+//        salutations[i] = salutation3[i];
+//    }
+
+    //strcpy est la fonction qu'on utilise pour copier une chaine dans une autre (affectation)
+    strcpy(salutations, salutation3);
+    printf("Nouvelle valeur de salutations: %s\n", salutations );
+
+    //salutations = "Salut a tous!"
+    strncpy(salutations, "Salut a tous les etudiant-es du cours INF155", TAILLE_MAX);
+    printf("Nouvelle valeur de salutations: %s\n", salutations );
+
+    //##############################################
+    char ch1[TAILLE_MAX];
+    char ch2[TAILLE_MAX];
+    char ch_totale[TAILLE_MAX];
+    int nb_etudiants = 45;
+
+    strncpy(ch1, "Bonjour", TAILLE_MAX);
+    strncpy(ch2, " a tous!", TAILLE_MAX);
+    strncat(ch1, ch2, TAILLE_MAX);
+    printf("ch1 contient: %s\n", ch1);
+
+
+    strncpy(ch1, "Bonjour", TAILLE_MAX);
+    strncpy(ch2, "a tous", TAILLE_MAX);
+
+    sprintf(ch_totale, "%s %s les %i etudiants et etudiantes de INF155.\n", ch1, ch2, nb_etudiants);
+    printf("%s\n", ch_totale);
+
+
+    strncpy(ch1, "Allo", TAILLE_MAX);
+    strncpy(ch2, "Azlo", TAILLE_MAX);
+
+    //NE JAMAIS COMPARER DEUX CHAINES DE CARACTERES AVEC ==
+    int resultat_comparaison;
+
+    resultat_comparaison = strcmp(ch1, ch2);
+    if( resultat_comparaison == 0)
     {
-        salutations[i] = salutation3[i];
+        printf("Les deux chaines sont identiques!\n");
+    }
+    else if( resultat_comparaison > 0)
+    {
+        printf("Ch1 est plus grande que ch2!\n");
+    }
+    else
+    {
+        printf("Ch1 est plus petite que ch2!\n");
     }
 
-    printf("Nouvelle valeur de salutations: %s\n", salutations );
 
     return 0;
 }
