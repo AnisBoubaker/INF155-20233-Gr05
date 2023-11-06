@@ -27,11 +27,13 @@ int main() {
 int compter_mots(char* chaine)
 {
     int compteur =0;
-    if(strlen(chaine) == 0)
+    int taille = strlen(chaine);
+
+    if(taille == 0)
     {
         return 0;
     }
-    for(int i=0; i<strlen(chaine); i++)
+    for(int i=0; i<taille ; i++)
     {
         if(chaine[i]==' ' || chaine[i]==',' || chaine[i]=='.')
         {
