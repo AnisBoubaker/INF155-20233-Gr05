@@ -3,4 +3,6 @@ project(EtudeDeCas C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(EtudeDeCas main.c t_date.c t_date.h)
+add_executable(EtudeDeCas main.c t_date.c t_date.h
+        t_machine.h
+        t_machine.c)
