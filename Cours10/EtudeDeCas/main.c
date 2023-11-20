@@ -20,6 +20,7 @@ int main() {
     //enum niveau_huile niveau;
 
 
+
     niveau = TRES_ELEVE;
 
     printf("Le niveau d'huile: %i\n\n\n", niveau);
@@ -49,6 +50,17 @@ int main() {
     {
         printf("Les deux dates sont identiques.\n");
     }
+
+
+    if( date_set_date(&d1, 29, FEVRIER, 2023) )
+    {
+        printf("La date a bien ete definie: %i/%i/%i\n", d1.jour, d1.mois, d1.annee);
+    }
+    else
+    {
+        printf("La date fournie est invalide!\n");
+    }
+
 
     return 0;
 }
