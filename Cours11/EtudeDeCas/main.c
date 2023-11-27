@@ -23,14 +23,25 @@ int nb_aleatoire(int min, int max);
 int main() {
 
     t_machine* machines[MAX_MACHINES]; //Tableau statique de t_machine*
+    t_machine** a_maintenir;
+    t_date date_min;
+    int nb_a_maintenir;
 
     machine_jeu_machines(machines, 50);
 
-    for(int i=0; i<50; i++)
-    {
-        machine_afficher(machines[i]);
-    }
+//    for(int i=0; i<50; i++)
+//    {
+//        machine_afficher(machines[i]);
+//    }
 
+    date_set_date(&date_min, 1, JUILLET, 2023);
+    a_maintenir = machines_a_maintenir(machines, 50, date_min, &nb_a_maintenir);
+
+    printf("Il y a %i machines a maintenir: \n", nb_a_maintenir);
+    for(int i=0; i < nb_a_maintenir ; i++)
+    {
+        machine_afficher( a_maintenir[i]);
+    }
 
 //    t_machine** machines; //Tableau dynamique de t_machine*
 //    t_machine* m1;

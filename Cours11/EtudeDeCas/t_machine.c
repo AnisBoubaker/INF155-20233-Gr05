@@ -78,3 +78,48 @@ void machine_jeu_machines(t_machine* machines[], int nb)
         date_set_date(&(machines[i]->date_maintenance), nb_aleatoire(1, 28), nb_aleatoire(1, 12), 2023);
     }
 }
+
+
+/*
+Identifie toutes les machines qui doivent subir une opération de maintenance.
+Ces machines sont celles dont la date de dernière maintenance est nulle (0-0-0)
+ou celles dont la date de dernière maintenance est antérieure à une date_min.
+ENTREES:
+- liste_machines: Tableau de références des machines du parc
+- nb_machines: nombre de machines dans le tableau liste_machines
+- date_min: Date minimale
+SORTIE:
+Tableau dynamique de références vers des machines qui doivent être maintenues.
+*/
+t_machine** machines_a_maintenir(t_machine* liste_machines[], int nb_machines, t_date date_min, int* nb_a_maintenir)
+{
+    t_machine** a_maintenir;
+    t_machine** tmp;
+
+    *nb_a_maintenir = 0;
+
+    a_maintenir = (t_machine**)malloc(sizeof(t_machine*)*nb_machines);
+    if(a_maintenir == NULL)
+    {
+        return NULL;
+    }
+
+    for(int i=0; i<nb_machines; i++)
+    {
+        if( date_cmp(liste_machines[i]->date_maintenance, date_min) < 0 )
+        {
+            a_maintenir[ *nb_a_maintenir ] = liste_machines[i];
+            (*nb_a_maintenir)++;
+        }
+    }
+
+    tmp = (t_machine**)realloc(a_maintenir, sizeof(t_machine*) * *nb_a_maintenir );
+    if(tmp == NULL)
+    {
+        return a_maintenir;
+    }
+    a_maintenir = tmp;
+
+    return a_maintenir;
+}
+
