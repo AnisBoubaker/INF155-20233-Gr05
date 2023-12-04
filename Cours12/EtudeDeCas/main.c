@@ -28,18 +28,29 @@ int main() {
 
     machine_jeu_machines(machines, 50);
 
-    machines_classees = machine_classer_categories(machines, 50);
-
-    for(int i=0; i<5; i++)
+    if(machine_sauvegarder_machines("../liste_machines.txt", machines, 50))
     {
-        printf("########## Debut des machines de la categorie %i ############ \n", i);
-        int j=0;
-        while(machines_classees[i][j]!=NULL)
-        {
-            machine_afficher( machines_classees[i][j] );
-            j++;
-        }
+        printf("Machines sauvegadees avec succes.\n");
     }
+    else
+    {
+        printf("Erreur lors de la sauvegarde des machines dans un fichier.");
+    }
+
+
+//    machines_classees = machine_classer_categories(machines, 50);
+
+
+//    for(int i=0; i<5; i++)
+//    {
+//        printf("########## Debut des machines de la categorie %i ############ \n", i);
+//        int j=0;
+//        while(machines_classees[i][j]!=NULL)
+//        {
+//            machine_afficher( machines_classees[i][j] );
+//            j++;
+//        }
+//    }
 
 
     return 0;

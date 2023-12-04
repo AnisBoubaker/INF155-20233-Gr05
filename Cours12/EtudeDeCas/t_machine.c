@@ -160,6 +160,43 @@ tab_ref_machines_2d machine_classer_categories(const t_machine* liste_machines[]
     return tab;
 }
 
+int machine_sauvegarder_machines(char* nom_fichier, const t_machine* liste_machines[], int nb_machines)
+{
+    FILE* le_fichier;
+
+    le_fichier = fopen(nom_fichier, "w");
+    if(le_fichier == NULL)
+    {
+        return 0;
+    }
+
+    fprintf(le_fichier , "%i\n", nb_machines);
+    for(int i=0; i<nb_machines; i++)
+    {
+        fprintf(le_fichier, "%i %s %i %i %i %i %i %i\n",
+                liste_machines[i]->num,
+                liste_machines[i]->num_modele,
+                liste_machines[i]->date_mise_service.jour,
+                liste_machines[i]->date_mise_service.mois,
+                liste_machines[i]->date_mise_service.annee,
+                liste_machines[i]->date_maintenance.jour,
+                liste_machines[i]->date_maintenance.mois,
+                liste_machines[i]->date_maintenance.annee);
+    }
+
+    fclose(le_fichier);
+    return 1;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

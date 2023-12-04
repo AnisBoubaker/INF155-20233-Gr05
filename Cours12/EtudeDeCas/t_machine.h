@@ -85,6 +85,11 @@ t_machine** machines_a_maintenir(t_machine* liste_machines[], int nb_machines, t
 t_machine*** machine_classer_categories(const t_machine* liste_machines[], int nb_machines);
 
 
+/*
+ * Sauvegarde la liste des machines dans le fichier nom_fichier.
+ * Retourne vrai si la sauvegarde a bien fonctionné ou faux sinon.
+ */
+int machine_sauvegarder_machines(char* nom_fichier, const t_machine* liste_machines[], int nb_machines);
 
 
 
