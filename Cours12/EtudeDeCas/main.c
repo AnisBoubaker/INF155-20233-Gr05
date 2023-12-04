@@ -23,103 +23,23 @@ int nb_aleatoire(int min, int max);
 int main() {
 
     t_machine* machines[MAX_MACHINES]; //Tableau statique de t_machine*
-    t_machine** a_maintenir;
-    t_date date_min;
-    int nb_a_maintenir;
+    tab_ref_machines_2d machines_classees;
+
 
     machine_jeu_machines(machines, 50);
 
-//    for(int i=0; i<50; i++)
-//    {
-//        machine_afficher(machines[i]);
-//    }
+    machines_classees = machine_classer_categories(machines, 50);
 
-    date_set_date(&date_min, 1, JUILLET, 2023);
-    a_maintenir = machines_a_maintenir(machines, 50, date_min, &nb_a_maintenir);
-
-    printf("Il y a %i machines a maintenir: \n", nb_a_maintenir);
-    for(int i=0; i < nb_a_maintenir ; i++)
+    for(int i=0; i<5; i++)
     {
-        machine_afficher( a_maintenir[i]);
+        printf("########## Debut des machines de la categorie %i ############ \n", i);
+        int j=0;
+        while(machines_classees[i][j]!=NULL)
+        {
+            machine_afficher( machines_classees[i][j] );
+            j++;
+        }
     }
-
-//    t_machine** machines; //Tableau dynamique de t_machine*
-//    t_machine* m1;
-//    int nb_machines;
-//
-//    printf("Combien de machines: ");
-//    scanf("%i", &nb_machines);
-//
-//    machines = (t_machine**)malloc(sizeof(t_machine*)*nb_machines);
-//    if(machines == NULL)
-//    {
-//        printf("Erreur d'allocation du tableau de machines.\n");
-//        exit(EXIT_FAILURE);
-//    }
-//
-//
-//    m1 = machine_init(10, "A2305D");
-//    machine_afficher(m1);
-//
-//    for(int i=0; i<5; i++)
-//    {
-//        machines[i] = machine_init(i, "A2305D");
-//    }
-//
-//    printf("Affichage de toutes les machines du tableau: \n");
-//    for(int i=0; i<5; i++)
-//    {
-//        machine_afficher(machines[i]);
-//    }
-//
-//
-//    machine_free(m1);
-//    free(machines);
-
-//    e_niveau_huile niveau;
-//    //enum niveau_huile niveau;
-//
-//
-//
-//    niveau = TRES_ELEVE;
-//
-//    printf("Le niveau d'huile: %i\n\n\n", niveau);
-//
-//
-//    t_date d1, d2;
-//
-//    d1.annee = 2023;
-//    d1.mois = 11;
-//    d1.jour = 20;
-//
-//    d2.annee = 2023;
-//    d2.mois = 11;
-//    d2.jour = 20;
-//
-//    int comparaison = date_cmp(d1, d2);
-//
-//    if( comparaison > 0 )
-//    {
-//        printf("d1 est plus recente\n");
-//    }
-//    else if( comparaison < 0 )
-//    {
-//        printf("d2 est plus recente\n");
-//    }
-//    else
-//    {
-//        printf("Les deux dates sont identiques.\n");
-//    }
-//
-//
-//    if( date_set_date(&d1, 29, FEVRIER, 2023) )
-//    {
-//        printf("La date a bien ete definie: %i/%i/%i\n", d1.jour, d1.mois, d1.annee);
-//    }
-//    else
-//    {
-//        printf("La date fournie est invalide!\n");
-//    }
 
 
     return 0;

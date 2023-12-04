@@ -12,6 +12,7 @@
 
 typedef enum categories{
     CAT1, CAT2, CAT3, CAT4, CAT5
+  // 0  ,  1  ,  2   , 3  ,  4
 } e_categorie;
 
 
@@ -23,6 +24,11 @@ typedef struct machine {
     t_date date_maintenance;
     e_categorie categorie;
 } t_machine;
+
+typedef t_machine* t_machine_ptr;
+
+typedef t_machine*** tab_ref_machines_2d;
+
 
 /*
 Alloue et initialise une nouvelle machine. Le numéro de la machine et
@@ -76,7 +82,10 @@ t_machine** machines_a_maintenir(t_machine* liste_machines[], int nb_machines, t
  * Créer un tableau à 2 dimensions de t_machine* où chaque machine est classée dans la ligne
  * correspondant à sa catégorie.
  */
-t_machine*** machine_classer_categories(t_machine* liste_machines[], int nb_machines);
+t_machine*** machine_classer_categories(const t_machine* liste_machines[], int nb_machines);
+
+
+
 
 
 

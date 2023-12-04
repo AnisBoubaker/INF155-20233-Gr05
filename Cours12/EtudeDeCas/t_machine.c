@@ -76,6 +76,7 @@ void machine_jeu_machines(t_machine* machines[], int nb)
         machines[i] = machine_init(i, num_modele);
         date_set_date(&(machines[i]->date_mise_service), nb_aleatoire(1, 28), nb_aleatoire(1, 12), 2023);
         date_set_date(&(machines[i]->date_maintenance), nb_aleatoire(1, 28), nb_aleatoire(1, 12), 2023);
+        machines[i]->categorie = nb_aleatoire(0, 4);
     }
 }
 
@@ -122,4 +123,61 @@ t_machine** machines_a_maintenir(t_machine* liste_machines[], int nb_machines, t
 
     return a_maintenir;
 }
+
+tab_ref_machines_2d machine_classer_categories(const t_machine* liste_machines[], int nb_machines)
+{
+    tab_ref_machines_2d tab;
+    int compteurs_par_cat[5] = {0};
+
+    tab = (t_machine***)malloc(sizeof(t_machine**)*5);
+    if(tab == NULL)
+    {
+        return NULL;
+    }
+    for(int i=0; i<5; i++)
+    {
+        //tab[i] = (t_machine**)malloc(100*sizeof(t_machine*));
+        //On utilise calloc pour remplir le tableau de 0 (NULL) car on utilise
+        //les valeurs NULL pour délimiter la fin de chaque ligne.
+        tab[i] = (t_machine**)calloc(sizeof(t_machine*), 100);
+        if(tab[i]==NULL)
+        {
+            for(int j=0; j<i; j++)
+            {
+                free(tab[j]);
+            }
+            free(tab);
+            return NULL;
+        }
+    }
+
+    for(int i=0; i<nb_machines; i++)
+    {
+        tab[ liste_machines[i]->categorie ][ compteurs_par_cat[liste_machines[i]->categorie]  ] = liste_machines[i];
+        compteurs_par_cat[ liste_machines[i]->categorie ] ++;
+    }
+
+    return tab;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
