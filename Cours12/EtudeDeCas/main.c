@@ -25,17 +25,32 @@ int main() {
     t_machine* machines[MAX_MACHINES]; //Tableau statique de t_machine*
     tab_ref_machines_2d machines_classees;
 
+    t_machine** machines_chargees;
+    int nb_machines;
 
-    machine_jeu_machines(machines, 50);
+    machines_chargees = machine_charger_machines("../liste_machines.txt", &nb_machines);
+    if(machines_chargees == NULL)
+    {
+        printf("Erreur lors du chargement des machines\n");
+        exit(EXIT_FAILURE);
+    }
 
-    if(machine_sauvegarder_machines("../liste_machines.txt", machines, 50))
+    for(int i=0 ; i<nb_machines; i++)
     {
-        printf("Machines sauvegadees avec succes.\n");
+        machine_afficher( machines_chargees[i] );
     }
-    else
-    {
-        printf("Erreur lors de la sauvegarde des machines dans un fichier.");
-    }
+
+
+//    machine_jeu_machines(machines, 50);
+//
+//    if(machine_sauvegarder_machines("../liste_machines.txt", machines, 50))
+//    {
+//        printf("Machines sauvegadees avec succes.\n");
+//    }
+//    else
+//    {
+//        printf("Erreur lors de la sauvegarde des machines dans un fichier.");
+//    }
 
 
 //    machines_classees = machine_classer_categories(machines, 50);

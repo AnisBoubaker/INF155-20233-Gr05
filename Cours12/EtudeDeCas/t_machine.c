@@ -188,6 +188,71 @@ int machine_sauvegarder_machines(char* nom_fichier, const t_machine* liste_machi
     return 1;
 }
 
+/*
+ * Écrire la fonction machine_charger_machines qui charge depuis le disque dur l’ensemble des
+ * machines d’un fichier (dont le nom est reçu en paramètre) et retourne un tableau de références
+ * vers les machines chargées.
+ */
+
+t_machine** machine_charger_machines(char* nom_fichier, int* nb_machines)
+{
+    FILE* le_fichier;
+    t_machine** liste_machines;
+
+
+    le_fichier = fopen(nom_fichier, "r");
+    if(le_fichier == NULL)
+    {
+        return NULL;
+    }
+
+    //Je ne mets pas de & car nb_machines que je reçois en paramètre est déjà
+    //une adresse.
+    fscanf(le_fichier, "%i", nb_machines);
+
+    liste_machines = (t_machine**)malloc(sizeof(t_machine*)* *nb_machines);
+    if(liste_machines == NULL)
+    {
+        fclose(le_fichier);
+        return NULL;
+    }
+
+    for(int i=0; i<*nb_machines; i++)
+    {
+        int num;
+        char num_modele[20];
+        fscanf(le_fichier, "%i %s", &num, num_modele);
+        //On crée la machine et on met son adresse dans le tableau
+        liste_machines[i] = machine_init(num, num_modele);
+        if(liste_machines[i]==NULL)
+        {
+            //Ça n'a pas fonctionné pour la machine i
+            //On libère d'abord toutes les machines qui ont bien été allouées
+            //de 0 jusqu'à i
+            for(int j=0; j<i; j++)
+            {
+                machine_free(liste_machines[j]);
+            }
+            //On libère le tableau de machines
+            free(liste_machines);
+            //On ferme le fichier
+            fclose(le_fichier);
+
+            return NULL;
+        }
+
+        fscanf(le_fichier, "%i %i %i %i %i %i",
+               &(liste_machines[i]->date_mise_service.jour),
+               &(liste_machines[i]->date_mise_service.mois),
+               &(liste_machines[i]->date_mise_service.annee),
+               &(liste_machines[i]->date_maintenance.jour),
+               &(liste_machines[i]->date_maintenance.mois),
+               &(liste_machines[i]->date_maintenance.annee));
+    }
+
+    fclose(le_fichier);
+    return liste_machines;
+}
 
 
 

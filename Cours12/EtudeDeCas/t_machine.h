@@ -91,6 +91,13 @@ t_machine*** machine_classer_categories(const t_machine* liste_machines[], int n
  */
 int machine_sauvegarder_machines(char* nom_fichier, const t_machine* liste_machines[], int nb_machines);
 
+/*
+ * Écrire la fonction machine_charger_machines qui charge depuis le disque dur l’ensemble des
+ * machines d’un fichier (dont le nom est reçu en paramètre) et retourne un tableau de références
+ * vers les machines chargées.
+ */
+
+t_machine** machine_charger_machines(char* nom_fichier, int* nb_machines);
 
 
 
